@@ -1,5 +1,5 @@
 {
-  "name": "react-google-contacts",
+  "name": "@ericpuskas/react-google-contacts",
   "version": "0.0.1",
   "description": "A Google Button to import user's gmail contacts",
   "main": "dist/google-contacts.js",
@@ -31,14 +31,13 @@
     "google-oAuth"
   ],
   "author": {
-    "name": "Quentin Rousseau",
-    "email": "contact@quent.in"
+    "name": "Eric Puskas"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kwent/react-google-contacts/issues"
+    "url": "https://github.com/EricPuskas/react-google-contacts/issues"
   },
-  "homepage": "https://github.com/kwent/react-google-contacts",
+  "homepage": "https://github.com/EricPuskas/react-google-contacts",
   "dependencies": {
     "@types/react": "*",
     "@webpack-cli/generators": "0.1.9",
