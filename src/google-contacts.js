@@ -86,15 +86,14 @@ class GoogleContacts extends Component {
 
     if (
       !parsed &&
-      parsed.feed &&
-      parsed.feed.entry &&
+      !parsed.feed &&
+      !parsed.feed.entry &&
       parsed.feed.entry.length === 0
     ) {
       onSuccess(results);
     }
 
     Object.keys(parsed.feed.entry).forEach(key => {
-      if (!key) return onSuccess([]);
       if (
         parsed.feed.entry[key] &&
         parsed.feed.entry[key]["gd:email"] &&
