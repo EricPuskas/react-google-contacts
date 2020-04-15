@@ -81,32 +81,30 @@ class GoogleContacts extends Component {
     };
     const parsed = xml.xml2js(response.body, options);
 
-    // Iterate over each contact.
     const results = [];
 
     if (
-      !parsed &&
-      !parsed.feed &&
-      !parsed.feed.entry &&
-      parsed.feed.entry.length === 0
+      parsed &&
+      parsed.feed &&
+      parsed.feed.entry &&
+      parsed.feed.entry.length > 0
     ) {
-      onSuccess(results);
+      // Iterate over each contact.
+      Object.keys(parsed.feed.entry).forEach(key => {
+        if (
+          parsed.feed.entry[key] &&
+          parsed.feed.entry[key]["gd:email"] &&
+          parsed.feed.entry[key]["gd:email"]._attributes &&
+          parsed.feed.entry[key]["gd:email"]._attributes.address
+        ) {
+          results.push({
+            title: extractTitleFromEntry(parsed.feed.entry[key]),
+            email: extractEmailFromEntry(parsed.feed.entry[key]),
+            phoneNumber: extractPhoneNumberFromEntry(parsed.feed.entry[key])
+          });
+        }
+      });
     }
-
-    Object.keys(parsed.feed.entry).forEach(key => {
-      if (
-        parsed.feed.entry[key] &&
-        parsed.feed.entry[key]["gd:email"] &&
-        parsed.feed.entry[key]["gd:email"]._attributes &&
-        parsed.feed.entry[key]["gd:email"]._attributes.address
-      ) {
-        results.push({
-          title: extractTitleFromEntry(parsed.feed.entry[key]),
-          email: extractEmailFromEntry(parsed.feed.entry[key]),
-          phoneNumber: extractPhoneNumberFromEntry(parsed.feed.entry[key])
-        });
-      }
-    });
 
     onSuccess(results);
   }
